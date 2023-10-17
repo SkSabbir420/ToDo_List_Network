@@ -9,9 +9,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.android.todolistnetwork.feature_todo_list.presentation.TodoListScreen
 import com.example.android.todolistnetwork.feature_todo_list.presentation.TodoListScreenViewModel
 import com.example.android.todolistnetwork.ui.theme.ToDoListNetworkTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?){

@@ -7,11 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.todolistnetwork.feature_todo_list.data.remote.TodoApi
 import com.example.android.todolistnetwork.feature_todo_list.domain.Todo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class TodoListScreenViewModel:ViewModel(){
+@HiltViewModel
+class TodoListScreenViewModel @Inject constructor(private val todoApi:TodoApi):ViewModel(){
 
     var todos by mutableStateOf<List<Todo>?>(null)
 
@@ -21,13 +24,8 @@ class TodoListScreenViewModel:ViewModel(){
         }
     }
 
-    suspend fun getAllTodos(){
-        val retrofitApi = Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(TodoApi::class.java)
-        todos = retrofitApi.getTodos().body()
+    private suspend fun getAllTodos(){
+        todos = todoApi.getTodos().body()
     }
 
 }
