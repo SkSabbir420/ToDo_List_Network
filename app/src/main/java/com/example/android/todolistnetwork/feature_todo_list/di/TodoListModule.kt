@@ -3,6 +3,9 @@ package com.example.android.todolistnetwork.feature_todo_list.di
 import android.app.Activity
 import androidx.core.app.ActivityCompat
 import com.example.android.todolistnetwork.feature_todo_list.data.remote.TodoApi
+import com.example.android.todolistnetwork.feature_todo_list.data.repository.TodoRepositoryImp
+import com.example.android.todolistnetwork.feature_todo_list.domain.Todo
+import com.example.android.todolistnetwork.feature_todo_list.domain.repository.TodoRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,5 +28,13 @@ object TodoListModule {
             .build()
             .create(TodoApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun ProvideAllTodos(todoApi:TodoApi):TodoRepository{
+        return TodoRepositoryImp(todoApi)
+    }
+
+
 
 }
