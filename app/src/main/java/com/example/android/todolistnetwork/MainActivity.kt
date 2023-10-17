@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ToDoListNetworkTheme {
                 val viewModel = hiltViewModel<TodoListScreenViewModel>()
-                viewModel.todos?.let { TodoListScreen(todos = it) }
+                viewModel.todos.let { it.value.todos?.let { it1 -> TodoListScreen(todos = it1) } }
             }
         }
 

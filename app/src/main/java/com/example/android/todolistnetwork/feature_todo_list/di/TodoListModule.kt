@@ -6,6 +6,7 @@ import com.example.android.todolistnetwork.feature_todo_list.data.remote.TodoApi
 import com.example.android.todolistnetwork.feature_todo_list.data.repository.TodoRepositoryImp
 import com.example.android.todolistnetwork.feature_todo_list.domain.Todo
 import com.example.android.todolistnetwork.feature_todo_list.domain.repository.TodoRepository
+import com.example.android.todolistnetwork.feature_todo_list.domain.use_case.GetAllTodos
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,6 +34,12 @@ object TodoListModule {
     @Singleton
     fun ProvideAllTodos(todoApi:TodoApi):TodoRepository{
         return TodoRepositoryImp(todoApi)
+    }
+
+    @Provides
+    @Singleton
+    fun ProvideGetAllTodosUseCase(todoRepository: TodoRepository):GetAllTodos{
+        return GetAllTodos(todoRepository)
     }
 
 
